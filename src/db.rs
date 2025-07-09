@@ -2,6 +2,7 @@ use sqlx::{mysql::MySqlPoolOptions, MySqlPool};
 use dotenvy::dotenv;
 use std::env;
 use crate::structs::Topic;
+use crate::structs::Top;
 
 
 pub async fn get_data_pool() -> MySqlPool {
@@ -46,5 +47,16 @@ pub async fn insert_topic(pool: &MySqlPool, msg: String) -> Result<(), sqlx::Err
 
     println!("✅ Inserted topic: {}", msg);
     Ok(())
+}
+
+pub async fn get_all_topics(pool: &MySqlPool) -> Result<Vec<Top>, sqlx::Error> {
+    let topics = sqlx::query_as!(
+        Top,
+        "SELECT * FROM topics"
+    )
+    .fetch_all(pool)
+    .await?;
+
+    Ok(topics)
 }
 
