@@ -46,6 +46,12 @@ run-local:
 	@echo "🚀 Running with cargo (ENV=local)..."
 	cargo run
 
+it-test-local:
+	cd integration-tests && go test --args local
+
+it-test-deploy:
+	cd integration-tests && go test --args deploy
+
 stop:
 	docker-compose down -v
 
