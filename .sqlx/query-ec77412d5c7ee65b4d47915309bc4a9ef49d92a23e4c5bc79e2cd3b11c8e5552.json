@@ -1,0 +1,12 @@
+{
+  "db_name": "MySQL",
+  "query": "INSERT INTO topics (topic) VALUES (?)",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 1
+    },
+    "nullable": []
+  },
+  "hash": "ec77412d5c7ee65b4d47915309bc4a9ef49d92a23e4c5bc79e2cd3b11c8e5552"
+}

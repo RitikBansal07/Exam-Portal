@@ -14,7 +14,7 @@ async fn main() -> std::io::Result<()> {
             .service(get_topic_by_id_controller)
             .service(insert_topic_controller)
     })
-    .bind(("127.0.0.1", 8080))?
+    .bind(("0.0.0.0", 8080))?
     .run()
     .await
 }
