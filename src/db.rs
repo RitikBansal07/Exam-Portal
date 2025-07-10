@@ -4,10 +4,22 @@ use std::env;
 use crate::structs::Topic;
 use crate::structs::Top;
 
+/// Get the correct database URL based on the ENV mode.
+pub fn get_database_url() -> String {
+    let environment = env::var("ENV").unwrap_or_else(|_| "local".to_string());
+
+    match environment.as_str() {
+        "local" => env::var("DATABASE_URL").expect("DATABASE_URL not set"),
+        "docker" => env::var("DATABASE_URL_DOCKER").expect("DATABASE_URL_DOCKER not set"),
+        "deploy" => env::var("DATABASE_URL_DOCKER_DEPLOYMENT").expect("DATABASE_URL_DOCKER_DEPLOYMENT not set"),
+        other => panic!("❌ Unknown ENV value: {}", other),
+    }
+}
 
 pub async fn get_data_pool() -> MySqlPool {
-    dotenv().ok();
-    let db_url = env::var("DATABASE_URL").expect("DATABASE_URL not set");
+    dotenv().ok(); // Load .env if not already loaded
+
+    let db_url = get_database_url(); // 👈 Get based on ENV
 
     MySqlPoolOptions::new()
         .max_connections(5)
