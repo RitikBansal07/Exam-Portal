@@ -32,7 +32,7 @@ jobs:
 
       - name: Tag image for GHCR
         run: |
-          docker tag exam-portal ghcr.io/${{ github.actor }}/exam-portal:latest
+          docker tag exam-portal ghcr.io/ritikbansal07/exam-portal:latest
 
       - name: Push image to GHCR
-        run: docker push ghcr.io/${{ github.actor }}/exam-portal:latest
+        run: docker push ghcr.io/ritikbansal07/exam-portal:latest
