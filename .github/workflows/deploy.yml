@@ -11,7 +11,7 @@ jobs:
 
     permissions:
       contents: read
-      packages: write  # Required for pushing to ghcr.io
+      packages: write
 
     steps:
       - name: Checkout source
@@ -20,12 +20,12 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Log in to GHCR
+      - name: Log in to GHCR as ritikbansal07
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ritikbansal07
+          password: ${{ secrets.GHCR_PAT_RITIK }}
 
       - name: Run Makefile build
         run: make build-deploy
@@ -36,3 +36,4 @@ jobs:
 
       - name: Push image to GHCR
         run: docker push ghcr.io/ritikbansal07/exam-portal:latest
+
